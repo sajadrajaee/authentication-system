@@ -171,53 +171,11 @@ def password_reset_view(request):
     else:
         form = PasswordResetForm()
     return render(request, 'authe/password_reset_request.html', {'form': form})
-# def password_reset_request(request):
-#     if request.method == 'POST':
-#         form = PasswordResetForm(request.POST)
-#         if form.is_valid():
-#             user_email = form.cleaned_data['email']
-#             associated_user = CustomUser.objects.filter(Q(email=user_email)).first() #what is first? 
-#             if associated_user:
-#                 subject = "the subject for the password"
-#                 email_template_name = 'authe/password_reset_email.html'
-#                 #creating message
-#                 message = {
-#                     'user':associated_user,
-#                     'domain': get_current_site(request).domain,
-#                     'site_name': 'authentication system',
-#                     'uid': urlsafe_base64_encode(force_bytes(associated_user.pk)),
-#                     'token':default_token_generator.make_token(associated_user),
-#                     'protocol': 'https' if request.is_secure() else 'http'
-#                 }
-#                 #message sending process
-#                 email = render_to_string(email_template_name, message)
-#                 try:
-#                     send_mail(
-#                         subject,
-#                         email,
-#                         settings.EMAIL_HOST_USER,
-#                         associated_user.email
-#                     )
-#                 except Exception as e:
-#                     return HttpResponse('invalid data found')
-#                 #if succeed, the user will be redirected to login page
-#                 messages.success(request, "check your email, we've sent you the instruction to reset your password")
-#             messages.error(request, "email not found!")
-#     form = PasswordResetForm()
-#     return render (
-#         request=request,
-#         template_name='authe/reset_request_form.html',
-#         context={'form':form}
-#     )
 
-
-#second step after password reset request is to confirm his/her request inbox
-#and change the password!
-# @login_required(login_url='authe:login')
 def password_reset_confirm(request, uidb64, token): 
     try:
         uid = urlsafe_base64_decode(uidb64).decode() #uid was encoded in 1st step, it is going to be decoded now
-        user = CustomUser.objects.get(pk=uid)
+        user = CustomUser.objects.get(pk=uid) 
     except (TypeError, ValueError, OverflowError, CustomUser.DoesNotExist):
         user = None
         
