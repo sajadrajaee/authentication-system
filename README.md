@@ -5,9 +5,11 @@ has function based view and some common functionalities like login, logout, regi
  confirmation, password change and password reset.
 
 you can set up this project as follow:
+
 1- first run the following command in your terminal to clone the project
 
 ```git clone https://github.com/sajadrajaee/authentication-system.git```
+
 2- get inside the folder where you can see manage.py file and create venv as follow:
 
   ```python -m venv <your-venv-name>```
@@ -15,6 +17,7 @@ you can set up this project as follow:
 and now activate that: 
 
   ```<your-venv-name>\Scripts\activate```
+  
 this will activate virtual envoirment for you
 
 3- run the following command to install requirements of project: 
@@ -32,5 +35,5 @@ this will activate virtual envoirment for you
   ```python manage.py runserver```
 
 
-note that this project is for educational purposes and feel free yourself to add other feature 
-and edit as you want. 
+That's it! note that this project is for educational purposes and feel free yourself to add other feature and functionalities
+and edit as you want! 
