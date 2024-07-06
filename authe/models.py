@@ -6,12 +6,6 @@ from django.utils import timezone
 from .managers import CustomUserManager
     
 class CustomUser(AbstractBaseUser, PermissionsMixin):
-    image = models.ImageField(
-        null=True, 
-        blank=True, 
-        default=None,
-        upload_to='images/'
-    )
     username_validator = UnicodeUsernameValidator()
 #it makes sure that a username can include special charecter from different lan and writing systems
 

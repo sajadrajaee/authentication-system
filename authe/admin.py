@@ -12,7 +12,7 @@ class CustomUserAdmin(UserAdmin):
     #fieldsets is used to style and manage items defined in userchange form
     fieldsets = (  
         (
-            "User Info", {"fields" : ("image", "username", "first_name", "last_name", "email", "password")}  
+            "User Info", {"fields" : ( "username", "first_name", "last_name", "email", "password")}  
         ),
         (
             "permission", {"fields":("is_active", "is_staff", "groups", "user_permissions")}
@@ -23,7 +23,6 @@ class CustomUserAdmin(UserAdmin):
         (None, {
             "classes" : ("wide",), #this is css class for styling registration form on admin panel of django
             "fields" :(
-                "image",
                 "date_joined",
                 "username",
                 "first_name",

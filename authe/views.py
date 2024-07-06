@@ -2,12 +2,10 @@ from django.shortcuts import render
 from .models import CustomUser
 from django.http import Http404
 from django.contrib import messages
-from .forms import CustomUserCreationForm, CustomUserChangeForm, SetPasswordChangeForm, PasswordResetForm
+from .forms import CustomUserCreationForm, CustomUserChangeForm, SetPasswordChangeForm, PasswordResetForm, LoginForm
 from django.shortcuts import redirect
-from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth import update_session_auth_hash, authenticate, login, logout
 from django.contrib.auth.forms import SetPasswordForm
-from django.contrib.auth import authenticate
-from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
 from django.conf import settings
@@ -39,23 +37,26 @@ def home(request):   #-------- I THINK WE HAVE A LOGICAL ERROR HERE! # it is sol
 
 def login_page(request):
     if request.method == 'POST':
-        # form = LoginForm(request.POST)
-        username = request.POST['username']
-        password = request.POST['password']
-        user = authenticate(
-            request,
-            username=username,
-            password = password
-        )
-        #checks for any password or username problem
-        if user is not None:
-            login(request, user)
-            return redirect('authe:home')
-        else:
-            messages.error(request, "invalid username or password")
-            return redirect('authe:login')
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
         
-    return render(request, 'authe/login.html')
+            user = authenticate(
+                request,
+                username=username,
+                password = password
+            )
+            #checks for any password or username problem
+            if user is not None:
+                login(request, user)
+                return redirect('authe:home')
+            else:
+                messages.error(request, "invalid username or password")
+                return redirect('authe:login')
+    else:
+        form = LoginForm()    
+    return render(request, 'authe/login.html', {'form':LoginForm})
     
 def registerpage(request):
     if request.method == 'POST':
