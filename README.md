@@ -24,16 +24,13 @@ this will activate virtual envoirment for you
 
   ```pip install -r requirements.txt ```
 
-4-now make migrations and migrate the changes to the database, run the following commands one by one:
-
-  ```python manage.py makemigrations authe ```
-  ```python manage.py migrate ```
-
-
-5-the project setup is finished now and run that using the following command:
+4-the project setup is finished now and run that using the following command:
 
   ```python manage.py runserver```
 
+and get to following http address: 
+
+```http://127.0.0.1:8000```
 
 That's it! note that this project is for educational purposes and feel free yourself to add other feature and functionalities
 and edit as you want! 
